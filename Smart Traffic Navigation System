@@ -1,0 +1,65 @@
+import java.util.*;
+
+public class SmartTrafficNavigation {
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+
+        ArrayList<Integer>[] graph = new ArrayList[n + 1];
+
+        for (int i = 1; i <= n; i++) {
+            graph[i] = new ArrayList<>();
+        }
+
+        for (int i = 0; i < m; i++) {
+            int a = sc.nextInt();
+            int b = sc.nextInt();
+
+            graph[a].add(b);
+            graph[b].add(a);
+        }
+
+        int start = sc.nextInt();
+        int end = sc.nextInt();
+
+        boolean[] visited = new boolean[n + 1];
+
+        Queue<Integer> queue = new LinkedList<>();
+        queue.add(start);
+        visited[start] = true;
+
+        while (!queue.isEmpty()) {
+            int current = queue.poll();
+
+            for (int next : graph[current]) {
+                if (!visited[next]) {
+                    visited[next] = true;
+                    queue.add(next);
+                }
+            }
+        }
+
+        if (visited[end]) {
+            System.out.println("yes");
+        } else {
+            System.out.println("no");
+        }
+
+        sc.close();
+    }
+}
+
+Input:
+5 4
+1 2
+2 3
+3 4
+4 5
+1 5
+
+Output:
+yes
