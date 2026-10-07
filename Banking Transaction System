@@ -1,0 +1,36 @@
+import java.util.Scanner;
+
+public class BankingTransaction {
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        int n = sc.nextInt();
+        int balance = 0;
+
+        for (int i = 0; i < n; i++) {
+
+            String transaction = sc.next();
+            int amount = sc.nextInt();
+
+            if (transaction.equals("deposit")) {
+                balance = balance + amount;
+            } 
+            else if (transaction.equals("withdraw")) {
+                balance = balance - amount;
+            }
+        }
+
+        System.out.println(balance);
+
+        sc.close();
+    }
+}
+Input:
+3
+deposit 5000
+withdraw 2000
+deposit 1000
+
+Output:
+4000
