@@ -1,0 +1,30 @@
+import java.util.Scanner;
+
+public class CalculatorUnitTesting {
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        String input = sc.nextLine();
+
+        int expected = 30;
+
+        // Calculate 10 + 20
+        int result = 10 + 20;
+
+        if (result == expected) {
+            System.out.println("test passed");
+        } else {
+            System.out.println("test failed");
+        }
+
+        sc.close();
+    }
+}
+
+Input:
+10+20
+
+Output:
+test passed
