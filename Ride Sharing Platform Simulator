@@ -1,0 +1,50 @@
+import java.util.Scanner;
+
+public class RideSharing {
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter number of rides: ");
+        int n = sc.nextInt();
+
+        for (int i = 1; i <= n; i++) {
+
+            System.out.print("Enter distance: ");
+            int distance = sc.nextInt();
+
+            System.out.print("Enter ride type: ");
+            String rideType = sc.next();
+
+            int fare;
+
+            if (rideType.equalsIgnoreCase("cab")) {
+                fare = distance * 5;
+            } 
+            else if (rideType.equalsIgnoreCase("auto")) {
+                fare = distance * 12;
+            } 
+            else {
+                fare = 0;
+            }
+
+            System.out.println("fare " + fare);
+        }
+
+        sc.close();
+    }
+}
+
+Input:
+Enter number of rides: 3
+Enter distance: 10
+Enter ride type: cab
+Enter distance: 15
+Enter ride type: auto
+Enter distance: 8
+Enter ride type: auto
+
+Output:
+fare 50
+fare 180
+fare 96
