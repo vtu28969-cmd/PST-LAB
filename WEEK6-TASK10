@@ -1,0 +1,67 @@
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String nStr = br.readLine();
+        if (nStr == null || nStr.trim().isEmpty()) return;
+
+        int n = Integer.parseInt(nStr.trim());
+        String s = br.readLine().trim();
+
+        if (n == 0) return;
+
+        StringBuilder output = new StringBuilder();
+
+        // Evaluate maximum palindrome for each rotation k
+        for (int k = 0; k < n; k++) {
+            // Construct rotated string: s[k...n-1] + s[0...k-1]
+            String rotated = s.substring(k) + s.substring(0, k);
+            output.append(getMaxPalindromeLength(rotated)).append("\n");
+        }
+
+        System.out.print(output.toString());
+    }
+
+    private static int getMaxPalindromeLength(String str) {
+        int m = str.length();
+        // Transform string for Manacher's Algorithm
+        char[] t = new char[2 * m + 1];
+        t[0] = '#';
+        for (int i = 0; i < m; i++) {
+            t[2 * i + 1] = str.charAt(i);
+            t[2 * i + 2] = '#';
+        }
+
+        int tLen = t.length;
+        int[] p = new int[tLen];
+        int c = 0, r = 0;
+        int maxLen = 0;
+
+        for (int i = 0; i < tLen; i++) {
+            int iMir = 2 * c - i;
+            if (r > i) {
+                p[i] = Math.min(r - i, p[iMir]);
+            } else {
+                p[i] = 0;
+            }
+
+            while (i - 1 - p[i] >= 0 && i + 1 + p[i] < tLen && t[i - 1 - p[i]] == t[i + 1 + p[i]]) {
+                p[i]++;
+            }
+
+            if (i + p[i] > r) {
+                c = i;
+                r = i + p[i];
+            }
+
+            if (p[i] > maxLen) {
+                maxLen = p[i];
+            }
+        }
+
+        return maxLen;
+    }
+}
