@@ -1,0 +1,6 @@
+class Solution {
+    public int strStr(String haystack, String needle) {
+        // Built-in String method returns the index or -1 if not found
+        return haystack.indexOf(needle);
+    }
+}
